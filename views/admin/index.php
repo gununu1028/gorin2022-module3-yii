@@ -45,7 +45,8 @@ $this->title = '管理画面';
             <?php endfor; ?>
         </table>
         <a href="<?= Url::toRoute('admin/new-item') ?>">商品情報の新規登録</a>
-    </div><?php endif; ?>
+    </div>
+<?php endif; ?>
 <script>
     function clickDeleteButton(event) {
         event.preventDefault();
