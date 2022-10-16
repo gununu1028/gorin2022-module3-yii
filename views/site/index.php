@@ -1,34 +1,53 @@
 <?php
-$this->title = '管理画面';
+
+/** @var yii\web\View $this */
+
+$this->title = 'My Yii Application';
 ?>
-<?php if (Yii::$app->user->isGuest) :  ?>
-    <p>ログインしてください。</p>
-<?php else : ?>
-    <h1>商品情報リスト</h1>
-    <?php
-    $items = Yii::$app->db->createCommand('SELECT * FROM items')->queryAll();
-    ?>
-    <div>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>商品名</th>
-                <th></th>
-            </tr>
-            <?php for ($i = 0; $i < count($items); $i++) : ?>
-                <tr>
-                    <td>
-                        <?= $items[$i]['id'] ?>
-                    </td>
-                    <td>
-                        <?= $items[$i]['name'] ?>
-                    </td>
-                    <td>
-                        <a href="/index.php?r=site/edit-item&id=<?= $items[$i]['id'] ?>">編集</a>
-                    </td>
-                </tr>
-            <?php endfor; ?>
-        </table>
-        <a href="/index.php?r=site/new-item">商品情報の新規登録</a>
+<div class="site-index">
+
+    <div class="jumbotron text-center bg-transparent">
+        <h1 class="display-4">Congratulations!</h1>
+
+        <p class="lead">You have successfully created your Yii-powered application.</p>
+
+        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
     </div>
-<?php endif; ?>
+
+    <div class="body-content">
+
+        <div class="row">
+            <div class="col-lg-4">
+                <h2>Heading</h2>
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                    fugiat nulla pariatur.</p>
+
+                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+            </div>
+            <div class="col-lg-4">
+                <h2>Heading</h2>
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                    fugiat nulla pariatur.</p>
+
+                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+            </div>
+            <div class="col-lg-4">
+                <h2>Heading</h2>
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                    fugiat nulla pariatur.</p>
+
+                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+            </div>
+        </div>
+
+    </div>
+</div>
