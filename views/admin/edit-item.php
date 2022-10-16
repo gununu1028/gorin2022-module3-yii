@@ -1,6 +1,7 @@
 <?php
 
 use yii\bootstrap5\ActiveForm;
+use yii\helpers\Url;
 
 $this->title = '商品情報の新規登録';
 
@@ -18,7 +19,7 @@ $item = $command->bindValue(':id', $id)->queryOne();
         <div style="width: 300px;">
             <?php
             $form = ActiveForm::begin(
-                ['action' => '/index.php?r=site/update-item']
+                ['action' => Url::toRoute('admin/update-item') ]
             );
             ?>
             <p>商品名<br>

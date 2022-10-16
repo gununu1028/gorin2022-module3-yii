@@ -1,6 +1,7 @@
 <?php
 
 use yii\bootstrap5\ActiveForm;
+use yii\helpers\Url;
 
 $this->title = '商品情報の新規登録';
 ?>
@@ -12,7 +13,7 @@ $this->title = '商品情報の新規登録';
         <div style="width: 300px;">
             <?php
             $form = ActiveForm::begin(
-                ['action' => '/index.php?r=site/create-item']
+                ['action' => Url::toRoute('admin/create-item') ]
             );
             ?>
             <p>商品名<br>
