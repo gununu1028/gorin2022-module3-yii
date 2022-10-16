@@ -1,10 +1,6 @@
 <?php
 
-/** @var yii\web\View $this */
-
-use yii\widgets\ListView;
-use yii\data\SqlDataProvider;
-use yii\bootstrap5\Nav;
+use yii\bootstrap5\ActiveForm;
 
 $this->title = '管理画面';
 ?>
@@ -21,6 +17,7 @@ $this->title = '管理画面';
                 <th>ID</th>
                 <th>商品名</th>
                 <th></th>
+                <th></th>
             </tr>
             <?php for ($i = 0; $i < count($items); $i++) : ?>
                 <tr>
@@ -33,9 +30,27 @@ $this->title = '管理画面';
                     <td>
                         <a href="/index.php?r=site/edit-item&id=<?= $items[$i]['id'] ?>">編集</a>
                     </td>
+                    <td>
+                        <?php
+                        $form = ActiveForm::begin(
+                            ['action' => '/index.php?r=site/delete-item']
+                        );
+                        ?>
+                        <input type="hidden" name="id" value="<?= $items[$i]['id'] ?>">
+                        <input type="submit" class="btn btn-link p-0 m-0" value="削除" onclick="clickDeleteButton(event)">
+                        <?php ActiveForm::end(); ?>
+                    </td>
                 </tr>
             <?php endfor; ?>
         </table>
         <a href="/index.php?r=site/new-item">商品情報の新規登録</a>
     </div>
 <?php endif; ?>
+<script>
+    function clickDeleteButton(event) {
+        event.preventDefault();
+        if (confirm('削除してよろしいですか？')) {
+            event.target.parentElement.submit();
+        }
+    }
+</script>

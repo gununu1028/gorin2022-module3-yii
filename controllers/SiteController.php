@@ -170,4 +170,11 @@ class SiteController extends Controller
         Yii::$app->session->setFlash('newItemSubmitted');
         return $this->render('edit-item');
     }
+
+    public function actionDeleteItem(){
+        $r = Yii::$app->request;
+        $id = $r->post('id');
+        Yii::$app->db->createCommand()->delete('items', 'id=:id', ['id' => $id])->execute();
+        return $this->render('delete-item');
+    }
 }
