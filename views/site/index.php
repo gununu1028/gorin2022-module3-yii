@@ -1,11 +1,4 @@
 <?php
-
-/** @var yii\web\View $this */
-
-use yii\widgets\ListView;
-use yii\data\SqlDataProvider;
-use yii\bootstrap5\Nav;
-
 $this->title = '管理画面';
 ?>
 <?php if (Yii::$app->user->isGuest) :  ?>
