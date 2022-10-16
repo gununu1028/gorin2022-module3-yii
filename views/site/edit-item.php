@@ -13,7 +13,7 @@ $item = $command->bindValue(':id', $id)->queryOne();
 <div>
     <h1>商品情報の編集</h1>
     <?php if (Yii::$app->session->hasFlash('newItemSubmitted')) : ?>
-        <p>編集を保存しました。</p>
+        <p>商品情報が更新されました。</p>
     <?php else : ?>
         <div style="width: 300px;">
             <?php

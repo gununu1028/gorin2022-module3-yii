@@ -7,7 +7,7 @@ $this->title = '商品情報の新規登録';
 <div>
     <h1>商品情報の新規登録</h1>
     <?php if (Yii::$app->session->hasFlash('newItemSubmitted')) : ?>
-        <p>新規登録しました。</p>
+        <p>商品情報が登録されました。</p>
     <?php else : ?>
         <div style="width: 300px;">
             <?php
