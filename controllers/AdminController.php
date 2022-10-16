@@ -76,7 +76,7 @@ class AdminController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->render('index');
         }
 
         $model->password = '';
@@ -94,7 +94,7 @@ class AdminController extends Controller
     {
         Yii::$app->user->logout();
 
-        return $this->goHome();
+        return $this->redirect(['login']);
     }
 
     // 「商品情報の新規登録」画面
