@@ -4,6 +4,7 @@
 
 use yii\widgets\ListView;
 use yii\data\SqlDataProvider;
+use yii\bootstrap5\Nav;
 
 $this->title = '管理画面';
 ?>
@@ -16,9 +17,26 @@ $this->title = '管理画面';
     $p = new SqlDataProvider([
         'sql' => 'SELECT * FROM items',
     ]);
-    echo ListView::widget([
-        'dataProvider' => $p,
-        'itemView' => '_items',
+    ?>
+    <div>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>商品名</th>
+            </tr>
+            <?php
+            echo ListView::widget([
+                'dataProvider' => $p,
+                'itemView' => '_items',
+            ]);
+            ?>
+        </table>
+    </div>
+    <?php
+    echo Nav::widget([
+        'items' => [
+            ['label' => '商品情報の新規登録', 'url' => ['/site/new-item']],
+        ]
     ]);
     ?>
 <?php endif; ?>

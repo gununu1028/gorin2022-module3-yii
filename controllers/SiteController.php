@@ -125,4 +125,26 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    // 「商品情報の新規登録」画面
+    public function actionNewItem()
+    {
+        return $this->render('new-item');
+    }
+
+    // 「商品情報の新規登録」画面でボタンをクリックしたあとの処理
+    public function actionCreateItem()
+    {
+        $r = Yii::$app->request;
+        $name = $r->post('name');
+        $price = $r->post('price');
+        $user_id = 1;
+        Yii::$app->db->createCommand()->insert('items', [
+            'name' => $name,
+            'price' => $price,
+            'user_id' => $user_id,
+        ])->execute();
+        Yii::$app->session->setFlash('newItemSubmitted');
+        return $this->render('new-item');
+    }
 }
