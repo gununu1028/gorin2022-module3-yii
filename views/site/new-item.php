@@ -1,18 +1,11 @@
 <?php
 
-/** @var yii\web\View $this */
-/** @var yii\bootstrap5\ActiveForm $form */
-/** @var app\models\ContactForm $model */
-
 use yii\bootstrap5\ActiveForm;
-use yii\bootstrap5\Html;
-use yii\captcha\Captcha;
 
 $this->title = '商品情報の新規登録';
 ?>
 <div>
     <h1>商品情報の新規登録</h1>
-
     <?php if (Yii::$app->session->hasFlash('newItemSubmitted')) : ?>
         <p>新規登録しました。</p>
     <?php else : ?>
@@ -33,6 +26,5 @@ $this->title = '商品情報の新規登録';
             </p>
             <?php ActiveForm::end(); ?>
         </div>
-
     <?php endif; ?>
 </div>

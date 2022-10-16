@@ -139,12 +139,35 @@ class SiteController extends Controller
         $name = $r->post('name');
         $price = $r->post('price');
         $user_id = 1;
-        Yii::$app->db->createCommand()->insert('items', [
+        $params = [
             'name' => $name,
             'price' => $price,
             'user_id' => $user_id,
-        ])->execute();
+        ];
+        Yii::$app->db->createCommand()->insert('items', $params)->execute();
         Yii::$app->session->setFlash('newItemSubmitted');
         return $this->render('new-item');
+    }
+
+    // 「商品情報の編集」画面
+    public function actionEditItem()
+    {
+        return $this->render('edit-item');
+    }
+
+    // 「商品情報の編集」画面でボタンをクリックしたあとの処理
+    public function actionUpdateItem()
+    {
+        $r = Yii::$app->request;
+        $id = $r->post('id');
+        $name = $r->post('name');
+        $price = $r->post('price');
+        $params = [
+            'name' => $name,
+            'price' => $price,
+        ];
+        Yii::$app->db->createCommand()->update('items', $params, 'id=:id', ['id' => $id])->execute();
+        Yii::$app->session->setFlash('newItemSubmitted');
+        return $this->render('edit-item');
     }
 }

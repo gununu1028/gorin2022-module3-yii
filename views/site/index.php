@@ -13,30 +13,29 @@ $this->title = '管理画面';
 <?php else : ?>
     <h1>商品情報リスト</h1>
     <?php
-    // $items = Yii::$app->db->createCommand('SELECT * FROM items')->queryAll();
-    $p = new SqlDataProvider([
-        'sql' => 'SELECT * FROM items',
-    ]);
+    $items = Yii::$app->db->createCommand('SELECT * FROM items')->queryAll();
     ?>
     <div>
         <table>
             <tr>
                 <th>ID</th>
                 <th>商品名</th>
+                <th></th>
             </tr>
-            <?php
-            echo ListView::widget([
-                'dataProvider' => $p,
-                'itemView' => '_items',
-            ]);
-            ?>
+            <?php for ($i = 0; $i < count($items); $i++) : ?>
+                <tr>
+                    <td>
+                        <?= $items[$i]['id'] ?>
+                    </td>
+                    <td>
+                        <?= $items[$i]['name'] ?>
+                    </td>
+                    <td>
+                        <a href="/index.php?r=site/edit-item&id=<?= $items[$i]['id'] ?>">編集</a>
+                    </td>
+                </tr>
+            <?php endfor; ?>
         </table>
+        <a href="/index.php?r=site/new-item">商品情報の新規登録</a>
     </div>
-    <?php
-    echo Nav::widget([
-        'items' => [
-            ['label' => '商品情報の新規登録', 'url' => ['/site/new-item']],
-        ]
-    ]);
-    ?>
 <?php endif; ?>
