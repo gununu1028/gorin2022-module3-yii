@@ -141,4 +141,13 @@ class AdminController extends Controller
         Yii::$app->session->setFlash('newItemSubmitted');
         return $this->render('edit-item');
     }
+
+    // 商品情報リストで「削除」ボタンをクリックしたあとの処理
+    public function actionDeleteItem()
+    {
+        $r = Yii::$app->request;
+        $id = $r->post('id');
+        Yii::$app->db->createCommand()->delete('items', 'id=:id', ['id' => $id])->execute();
+        return $this->render('delete-item');
+    }
 }
