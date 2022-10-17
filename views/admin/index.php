@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Url;
-use yii\bootstrap5\ActiveForm;
+use yii\widgets\ActiveForm;
 
 $this->title = '管理画面';
 ?>
