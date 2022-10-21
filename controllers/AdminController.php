@@ -160,14 +160,29 @@ class AdminController extends Controller
     // 「セットメニュー新規登録」画面でボタンをクリックしたあとの処理
     public function actionCreateSet()
     {
-        $r = Yii::$app->request;
-        $name = $r->post('name');
-        $user_id = 1;
-        $params = [
-            'name' => $name,
-            'user_id' => $user_id,
-        ];
-        Yii::$app->db->createCommand()->insert('sets', $params)->execute();
+        Yii::$app->db->transaction(function ($d) {
+            $r = Yii::$app->request;
+            $name = $r->post('name');
+            $select_items = $r->post('select_items');
+            $user_id = 1;
+            $params = [
+                'name' => $name,
+                'user_id' => $user_id,
+            ];
+            // setsテーブルにレコードを作る
+            $d->createCommand()->insert('sets', $params)->execute();
+            $created_set = $d->createCommand('SELECT * FROM sets ORDER BY id desc')->queryOne();
+            $sets_id = $created_set['id'];
+            for ($i = 0; $i < count($select_items); $i++) {
+                $items_id = $select_items[$i];
+                $params = [
+                    'sets_id' => $sets_id,
+                    'items_id' => $items_id,
+                ];
+                // set_itemsテーブルにレコードを作る
+                $d->createCommand()->insert('set_items', $params)->execute();
+            }
+        });
         Yii::$app->session->setFlash('createdSet');
         return $this->render('new-set');
     }
@@ -187,15 +202,30 @@ class AdminController extends Controller
     // 「セットメニューの編集」画面でボタンをクリックしたあとの処理
     public function actionUpdateSet()
     {
-        $r = Yii::$app->request;
-        $id = $r->post('id');
-        $name = $r->post('name');
-        $user_id = 1;
-        $params = [
-            'name' => $name,
-            'user_id' => $user_id,
-        ];
-        Yii::$app->db->createCommand()->update('sets', $params, 'id=:id', ['id' => $id])->execute();
+        Yii::$app->db->transaction(function ($d) {
+            $r = Yii::$app->request;
+            $sets_id = $r->post('id');
+            $name = $r->post('name');
+            $select_items = $r->post('select_items');
+            $user_id = 1;
+            $params = [
+                'name' => $name,
+                'user_id' => $user_id,
+            ];
+            // setsテーブルのレコードを更新する
+            $d->createCommand()->update('sets', $params, 'id=:id', ['id' => $sets_id])->execute();
+            // set_itemsテーブルにある古いレコードを削除する
+            $d->createCommand()->delete('set_items', 'sets_id=:sets_id', ['sets_id' => $sets_id])->execute();
+            for ($i = 0; $i < count($select_items); $i++) {
+                $items_id = $select_items[$i];
+                $params = [
+                    'sets_id' => $sets_id,
+                    'items_id' => $items_id,
+                ];
+                // set_itemsテーブルにレコードを作る
+                $d->createCommand()->insert('set_items', $params)->execute();
+            }
+        });
         Yii::$app->session->setFlash('updatedSet');
         return $this->render('edit-set');
     }
@@ -203,10 +233,12 @@ class AdminController extends Controller
     // セットメニューリストで「削除」ボタンをクリックしたあとの処理
     public function actionDeleteSet()
     {
-        $r = Yii::$app->request;
-        $id = $r->post('id');
-        Yii::$app->db->createCommand()->delete('sets', 'id=:id', ['id' => $id])->execute();
+        Yii::$app->db->transaction(function ($d) {
+            $r = Yii::$app->request;
+            $id = $r->post('id');
+            $d->createCommand()->delete('sets', 'id=:id', ['id' => $id])->execute();
+            $d->createCommand()->delete('set_items', 'sets_id=:sets_id', ['sets_id' => $id])->execute();
+        });
         return $this->render('delete-set');
     }
-
 }
