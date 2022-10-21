@@ -12,7 +12,7 @@ $this->title = '管理画面';
     <?php
     $items = Yii::$app->db->createCommand('SELECT * FROM items')->queryAll();
     ?>
-    <div>
+    <div style="margin-bottom:20px;">
         <table>
             <tr>
                 <th>ID</th>
@@ -44,8 +44,13 @@ $this->title = '管理画面';
                 </tr>
             <?php endfor; ?>
         </table>
-        <a href="<?= Url::toRoute('admin/new-item') ?>">商品情報の新規登録</a>
     </div>
+    <p>
+        <a href="<?= Url::toRoute('admin/new-item') ?>">商品情報の新規登録</a>
+    </p>
+    <p>
+        <a href="<?= Url::toRoute('admin/new-set') ?>">セットメニューの新規登録</a>
+    </p>
 <?php endif; ?>
 <script>
     function clickDeleteButton(event) {

@@ -32,7 +32,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
 <header id="header">
     <?php
     NavBar::begin([
-        'brandLabel' => '管理画面',
+        'brandLabel' => 'モジュール3管理画面',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top']
     ]);
@@ -40,6 +40,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
         'options' => ['class' => 'navbar-nav'],
         'items' => [
             ['label' => '商品管理', 'url' => ['/admin/']],
+            ['label' => 'セットメニュー管理', 'url' => ['/admin/show-set']],
             Yii::$app->user->isGuest
                 ? ['label' => 'ログイン', 'url' => ['/admin/login']]
                 : '<li class="nav-item">'

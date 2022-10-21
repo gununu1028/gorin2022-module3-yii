@@ -150,4 +150,63 @@ class AdminController extends Controller
         Yii::$app->db->createCommand()->delete('items', 'id=:id', ['id' => $id])->execute();
         return $this->render('delete-item');
     }
+
+    // 「セットメニュー新規登録」画面
+    public function actionNewSet()
+    {
+        return $this->render('new-set');
+    }
+
+    // 「セットメニュー新規登録」画面でボタンをクリックしたあとの処理
+    public function actionCreateSet()
+    {
+        $r = Yii::$app->request;
+        $name = $r->post('name');
+        $user_id = 1;
+        $params = [
+            'name' => $name,
+            'user_id' => $user_id,
+        ];
+        Yii::$app->db->createCommand()->insert('sets', $params)->execute();
+        Yii::$app->session->setFlash('createdSet');
+        return $this->render('new-set');
+    }
+
+    // 「セットメニューリスト」画面
+    public function actionShowSet()
+    {
+        return $this->render('show-set');
+    }
+
+    // 「セットメニューの編集」画面
+    public function actionEditSet()
+    {
+        return $this->render('edit-set');
+    }
+
+    // 「セットメニューの編集」画面でボタンをクリックしたあとの処理
+    public function actionUpdateSet()
+    {
+        $r = Yii::$app->request;
+        $id = $r->post('id');
+        $name = $r->post('name');
+        $user_id = 1;
+        $params = [
+            'name' => $name,
+            'user_id' => $user_id,
+        ];
+        Yii::$app->db->createCommand()->update('sets', $params, 'id=:id', ['id' => $id])->execute();
+        Yii::$app->session->setFlash('updatedSet');
+        return $this->render('edit-set');
+    }
+
+    // セットメニューリストで「削除」ボタンをクリックしたあとの処理
+    public function actionDeleteSet()
+    {
+        $r = Yii::$app->request;
+        $id = $r->post('id');
+        Yii::$app->db->createCommand()->delete('sets', 'id=:id', ['id' => $id])->execute();
+        return $this->render('delete-set');
+    }
+
 }

@@ -3,7 +3,7 @@
 use yii\bootstrap5\ActiveForm;
 use yii\helpers\Url;
 
-$this->title = '商品情報の新規登録';
+$this->title = '商品情報の編集';
 
 $r = Yii::$app->request;
 $id = $r->get('id');
