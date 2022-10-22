@@ -1,6 +1,6 @@
 <?php
 
-use yii\bootstrap5\ActiveForm;
+use yii\widgets\ActiveForm;
 use yii\helpers\Url;
 
 $this->title = '商品情報の編集';
