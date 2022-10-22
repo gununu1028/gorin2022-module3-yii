@@ -35,10 +35,10 @@ $items = Yii::$app->db->createCommand('SELECT * FROM items')->queryAll();
                 </tr>
                 <?php for ($i = 0; $i < count($items); $i++) : ?>
                     <?php
-                    $command = Yii::$app->db->createCommand('SELECT * FROM set_items WHERE sets_id=:sets_id AND items_id=:items_id');
+                    $command = Yii::$app->db->createCommand('SELECT * FROM set_items WHERE sets_id=:sets_id AND item_id=:item_id');
                     $params = [
                         ':sets_id' => $sets_id,
-                        ':items_id' => $items[$i]['id']
+                        ':item_id' => $items[$i]['id']
                     ];
                     $set_items = $command->bindValues($params)->queryOne();
                     if ($set_items) :

@@ -25,12 +25,12 @@ class SetsController extends Controller
         for ($i = 0; $i < count($sets); $i++) {
             $q = new Query;
             $q->select('items.*')->from('items');
-            $q->join('INNER JOIN', 'set_items', 'set_items.items_id = items.id');
+            $q->join('INNER JOIN', 'set_items', 'set_items.item_id = items.id');
             $q->where(['sets_id' => $sets[$i]['id']]);
             $items = $q->all();
             $sets[$i]['items'] = $items;
         }
-        
+
         return $sets;
     }
 }

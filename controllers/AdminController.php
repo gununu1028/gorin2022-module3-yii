@@ -174,10 +174,10 @@ class AdminController extends Controller
             $created_set = $d->createCommand('SELECT * FROM sets ORDER BY id desc')->queryOne();
             $sets_id = $created_set['id'];
             for ($i = 0; $i < count($select_items); $i++) {
-                $items_id = $select_items[$i];
+                $item_id = $select_items[$i];
                 $params = [
                     'sets_id' => $sets_id,
-                    'items_id' => $items_id,
+                    'item_id' => $item_id,
                 ];
                 // set_itemsテーブルにレコードを作る
                 $d->createCommand()->insert('set_items', $params)->execute();
@@ -217,10 +217,10 @@ class AdminController extends Controller
             // set_itemsテーブルにある古いレコードを削除する
             $d->createCommand()->delete('set_items', 'sets_id=:sets_id', ['sets_id' => $sets_id])->execute();
             for ($i = 0; $i < count($select_items); $i++) {
-                $items_id = $select_items[$i];
+                $item_id = $select_items[$i];
                 $params = [
                     'sets_id' => $sets_id,
-                    'items_id' => $items_id,
+                    'item_id' => $item_id,
                 ];
                 // set_itemsテーブルにレコードを作る
                 $d->createCommand()->insert('set_items', $params)->execute();
