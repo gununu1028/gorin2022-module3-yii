@@ -6,9 +6,9 @@ use yii\helpers\Url;
 $this->title = 'セットメニューの編集';
 
 $r = Yii::$app->request;
-$sets_id = $r->get('id');
+$set_id = $r->get('id');
 $command = Yii::$app->db->createCommand('SELECT * FROM sets WHERE id=:id');
-$s = $command->bindValue(':id', $sets_id)->queryOne();
+$s = $command->bindValue(':id', $set_id)->queryOne();
 $items = Yii::$app->db->createCommand('SELECT * FROM items')->queryAll();
 
 ?>
@@ -35,9 +35,9 @@ $items = Yii::$app->db->createCommand('SELECT * FROM items')->queryAll();
                 </tr>
                 <?php for ($i = 0; $i < count($items); $i++) : ?>
                     <?php
-                    $command = Yii::$app->db->createCommand('SELECT * FROM set_items WHERE sets_id=:sets_id AND item_id=:item_id');
+                    $command = Yii::$app->db->createCommand('SELECT * FROM set_items WHERE set_id=:set_id AND item_id=:item_id');
                     $params = [
-                        ':sets_id' => $sets_id,
+                        ':set_id' => $set_id,
                         ':item_id' => $items[$i]['id']
                     ];
                     $set_items = $command->bindValues($params)->queryOne();

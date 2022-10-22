@@ -26,7 +26,7 @@ class SetsController extends Controller
             $q = new Query;
             $q->select('items.*')->from('items');
             $q->join('INNER JOIN', 'set_items', 'set_items.item_id = items.id');
-            $q->where(['sets_id' => $sets[$i]['id']]);
+            $q->where(['set_id' => $sets[$i]['id']]);
             $items = $q->all();
             $sets[$i]['items'] = $items;
         }
