@@ -5,7 +5,6 @@ namespace app\controllers\api;
 use Yii;
 use yii\web\Controller;
 use yii\web\Response;
-use yii\db\Query;
 
 class OrderController extends Controller
 {
