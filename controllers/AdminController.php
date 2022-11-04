@@ -241,4 +241,42 @@ class AdminController extends Controller
         });
         return $this->render('delete-set');
     }
+
+    // 「クーポンリスト」
+    public function actionShowCoupon()
+    {
+        return $this->render('show-coupon');
+    }
+
+    // 「クーポンの新規登録」画面
+    public function actionNewCoupon()
+    {
+        return $this->render('new-coupon');
+    }
+
+    // 「クーポンの新規登録」画面でボタンをクリックしたあとの処理
+    public function actionCreateCoupon()
+    {
+        $r = Yii::$app->request;
+        $code = $r->post('code');
+        $discount_price = $r->post('discount_price');
+        $user_id = 1;
+        $params = [
+            'code' => $code,
+            'discount_price' => $discount_price,
+            'user_id' => $user_id,
+        ];
+        Yii::$app->db->createCommand()->insert('coupons', $params)->execute();
+        Yii::$app->session->setFlash('createdCoupon');
+        return $this->render('new-coupon');
+    }
+
+    // クーポンリストで「削除」ボタンをクリックしたあとの処理
+    public function actionDeleteCoupon()
+    {
+        $r = Yii::$app->request;
+        $id = $r->post('id');
+        Yii::$app->db->createCommand()->delete('coupons', 'id=:id', ['id' => $id])->execute();
+        return $this->render('delete-coupon');
+    }
 }

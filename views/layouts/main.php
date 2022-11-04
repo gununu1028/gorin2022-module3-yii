@@ -40,7 +40,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
         'options' => ['class' => 'navbar-nav'],
         'items' => [
             ['label' => '商品管理', 'url' => ['/admin/']],
-            ['label' => 'セットメニュー管理', 'url' => ['/admin/show-set']],
+            ['label' => 'クーポン管理', 'url' => ['/admin/show-coupon']],
             Yii::$app->user->isGuest
                 ? ['label' => 'ログイン', 'url' => ['/admin/login']]
                 : '<li class="nav-item">'

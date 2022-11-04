@@ -49,7 +49,7 @@ $this->title = '管理画面';
         <a href="<?= Url::toRoute('admin/new-item') ?>">商品情報の新規登録</a>
     </p>
     <p>
-        <a href="<?= Url::toRoute('admin/new-set') ?>">セットメニューの新規登録</a>
+        <a href="<?= Url::toRoute('admin/new-coupon') ?>">クーポンの新規登録</a>
     </p>
 <?php endif; ?>
 <script>
